@@ -2,9 +2,6 @@ define(['jquery', 'domReady!'], function($) {
     return function (config) {
 
         $('.download-tab.load.btn').on('click', function () {
-            console.log(config.SKU);
-            console.log(config.apiEndpoint);
-            console.log(config.additionalGetParams);
             loadImages(config.apiEndpoint, config.SKU, config.additionalGetParams);
         });
     }
@@ -20,7 +17,6 @@ define(['jquery', 'domReady!'], function($) {
                 url: apiEndpoint + "?unique_id=" + sku + additionalGetParams
             }).then(function (data) {
                 $.each(data, function() {
-                    console.log(this.url);
                     $('.download-tab-content').append('<div class="download-tab image"><img src="'+this.url+'" alt="'+this.alt+'"/></div>');
                 });
             });
