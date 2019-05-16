@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Konatsu.pl Robert Rupa.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <catalog>
+            <download_tab>
+                <status>1</status>
+                <api_endpoint>http://upload.konatsu.pl/uploader/view/</api_endpoint>
+            </download_tab>
+        </catalog>
+    </default>
+</config>
