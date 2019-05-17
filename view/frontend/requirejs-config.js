@@ -3,11 +3,16 @@
  */
 
 var config = {
-    map: {
-        '*': {
-            isotope: 'RobertRupa_DownloadTab/js/isotope.pkgd.min',
-            isotope_init: 'RobertRupa_DownloadTab/js/isotope_init',
-            ajaxImageLoader: 'RobertRupa_DownloadTab/js/ajax-image-loader'
-        }
+    paths: {
+        'lightGallery': 'RobertRupa_DownloadTab/js/lightgallery-all',
+        'ajaxImageLoader': 'RobertRupa_DownloadTab/js/ajax-image-loader'
+    },
+    shim: {
+        'lightGallery': {
+            deps: ['jquery']
+        },
+        'ajaxImageLoader': {
+            deps: ['jquery', 'lightGallery']
+        },
     }
 };

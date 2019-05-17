@@ -1,7 +1,10 @@
-define(['jquery', 'domReady!'], function($) {
-    return function (config) {
+define(['jquery', 'lightGallery', 'domReady!'], function($) {
 
+    var $lg = $('.download-tab.image-container');
+    return function (config) {
+        //console.log(lightGallery);
         $('.download-tab.load.btn').on('click', function () {
+            $(this).hide();
             loadImages(config.apiEndpoint, config.SKU, config.additionalGetParams);
         });
     }
@@ -17,9 +20,11 @@ define(['jquery', 'domReady!'], function($) {
                 url: apiEndpoint + "?unique_id=" + sku + additionalGetParams
             }).then(function (data) {
                 $.each(data, function() {
-                    $('.download-tab-content').append('<div class="download-tab image"><img src="'+this.url+'" alt="'+this.alt+'"/></div>');
+                    let items = $('<a href="'+this.url+'" data-fancybox><img src="'+this.url+'" alt="'+this.alt+'"/></a>');
+                    $('.download-tab.image-container').append(items);
                 });
             });
         });
+        $lg.lightGallery();
     }
 });

@@ -1,33 +1,14 @@
-/* ---- grid ---- */
-
-.download-tab.image-container {
-    background: #DDD;
-}
-
-
-/* clear fix */
-
-.download-tab.image-container:after {
+.download-tab.image-container:after{
     content: '';
     display: block;
     clear: both;
 }
-
-
-/* ---- .element-item ---- */
-
-
-/* 5 columns, percentage width */
-
-.download-tab.image,
-.grid-sizer {
-    width: 20%;
+.download-tab.image-container img{
+    width: 24%;
 }
 
-.download-tab.image {
+.download-tab.image-container img{
     float: left;
-    height: 100px;
-    background: #0D8;
-    border: 2px solid #333;
-    border-color: hsla(0, 0%, 0%, 0.7);
+    height: 150px;
+    object-fit: contain;
 }

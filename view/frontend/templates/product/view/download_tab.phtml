@@ -3,20 +3,11 @@
     <button class="download-tab load btn btn-primary action primary"><?php echo __('Load images') ?></button>
   </div>
   <div class="download-tab image-container">
-    <br clear="all"/>
   </div>
 </div>
-<style><?php echo $block->getAdditionalStyles(); ?></style>
-<script type="text/javascript">
-    require(['isotope_init', 'ajaxImageLoader'], function () {});
-</script>
-<script type="text/x-magento-init">
-    {
-        ".download-tab image-container": {
-            "isotope_init": {}
-        }
-    }
-</script>
+<style>
+    <?php echo $block->getAdditionalStyles(); ?>
+</style>
 <script type="text/x-magento-init">
     {
         "*": {
