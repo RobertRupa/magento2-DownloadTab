@@ -17,7 +17,7 @@ define(['jquery', 'lightGallery', 'domReady!'], function($) {
                     "*": 'application/json',
                 },
                 async: false,
-                url: apiEndpoint + "?unique_id=" + sku + additionalGetParams
+                url: apiEndpoint + sku + additionalGetParams
             }).then(function (data) {
                 $.each(data, function() {
                     let items = $('<a href="'+this.url+'" data-fancybox><img src="'+this.url+'" alt="'+this.alt+'"/></a>');
