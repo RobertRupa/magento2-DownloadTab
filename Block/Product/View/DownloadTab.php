@@ -83,7 +83,7 @@ class DownloadTab extends \Magento\Framework\View\Element\Template
         else{
             $uniqueID[] = $product->getData($this->getUniqueIDAttribute());            
         }
-        return json_encode([]);
+        return json_encode($uniqueID);
     }
 
     /**
