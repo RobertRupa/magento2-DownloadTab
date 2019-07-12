@@ -22,7 +22,7 @@ define(['jquery', 'lightGallery', 'domReady!'], function($) {
                 url: apiEndpoint + uID + additionalGetParams
             }).then(function(data) {
                 $.each(data, function() {
-                    let items = $('<a href="' + this[5] + '" data-fancybox><img src="' + this[5] + '" alt="' + this[3] + '"/></a>');
+                    let items = $('<a href="' + this[5] + '" data-fancybox><img src="' + this[5] + '" alt="' + this[4] + '"/></a>');
                     $('.download-tab.image-container').append(items);
                 });
             });
