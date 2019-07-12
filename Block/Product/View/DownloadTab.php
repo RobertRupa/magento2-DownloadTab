@@ -8,11 +8,12 @@ namespace RobertRupa\DownloadTab\Block\Product\View;
 use Magento\Catalog\Block\Product\View\AbstractView;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Catalog\Model\Product;
 
 /**
  * Product details block.
  */
-class Downloadtab extends \Magento\Framework\View\Element\Template
+class DownloadTab extends \Magento\Framework\View\Element\Template
 {
 
     /**
@@ -26,7 +27,12 @@ class Downloadtab extends \Magento\Framework\View\Element\Template
     protected $abstractView;
 
     /**
-     * Downloadtab constructor.
+     * @var AbstractView
+     */
+    protected $product;
+
+    /**
+     * DownloadTab constructor.
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param ScopeConfigInterface $scopeConfig
      * @param array $data
@@ -35,10 +41,12 @@ class Downloadtab extends \Magento\Framework\View\Element\Template
         \Magento\Framework\View\Element\Template\Context $context,
         ScopeConfigInterface $scopeConfig,
         AbstractView  $abstractView,
+        Product  $product,
         array $data = []
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->abstractView = $abstractView;
+        $this->product = $product;
 
         parent::__construct($context, $data);
     }
@@ -47,18 +55,35 @@ class Downloadtab extends \Magento\Framework\View\Element\Template
      * @return mixed
      * @throws LocalizedException
      */
-    public function getProductSKU()
+    public function getUniqueID()
     {
-        $sku = [];
+        $uniqueID = [];
         $product = $this->abstractView->getProduct();
-        $sku[] = $product->getName();
-        if (in_array($product->getTypeId(), ['configurable', 'grouped', 'bundle'])) {
+        if (in_array($product->getTypeId(), ['configurable'])) {
             $_children = $product->getTypeInstance()->getUsedProducts($product);
             foreach ($_children as $child) {
-                $sku[] = $child->getSKU();
+                $child = $this->product->load($child->getEntityId());
+                $uniqueID[] = $child->getResource()->getAttribute($this->getUniqueIDAttribute())->getFrontend()->getValue($child);
             }
         }
-        return json_encode($sku);
+        else if (in_array($product->getTypeId(), ['grouped'])) {
+            $_children = $product->getTypeInstance()->getAssociatedProducts($product);
+            foreach ($_children as $child) {
+                $child = $this->product->load($child->getEntityId());
+                $uniqueID[] = $child->getResource()->getAttribute($this->getUniqueIDAttribute())->getFrontend()->getValue($child);
+            }
+        }
+        else if (in_array($product->getTypeId(), ['bundle'])) {
+            $_children = $product->getTypeInstance()->getChildrenIds($product->getEntityID());
+            foreach ($_children as $child) {
+                $child = $this->product->load($child);
+                $uniqueID[] = $child->getResource()->getAttribute($this->getUniqueIDAttribute())->getFrontend()->getValue($child);
+            }
+        }
+        else{
+            $uniqueID[] = $product->getData($this->getUniqueIDAttribute());            
+        }
+        return json_encode([]);
     }
 
     /**
@@ -83,6 +108,14 @@ class Downloadtab extends \Magento\Framework\View\Element\Template
     public function getAdditionalGetParams()
     {
         return $this->getConfig("download_tab/general/additional_get_params");
+    }
+
+    /**
+     * @return string
+     */
+    public function getUniqueIDAttribute()
+    {
+        return $this->getConfig("download_tab/general/attribute");
     }
 
     /**

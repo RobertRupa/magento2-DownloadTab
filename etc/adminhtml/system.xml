@@ -16,6 +16,10 @@
             <resource>RobertRupa_DownloadTab::config_download_tab</resource>
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>General settings</label>
+                <field id="attribute" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Attribute as UniqueID</label>        
+                    <source_model>RobertRupa\DownloadTab\Model\Config\Source\ProductAttributes</source_model>
+                </field>
                 <field id="status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Module Status</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>

@@ -1,26 +1,28 @@
 define(['jquery', 'lightGallery', 'domReady!'], function($) {
 
     var $lg = $('.download-tab.image-container');
-    return function (config) {
-        //console.log(lightGallery);
-        $('.download-tab.load.btn').on('click', function () {
+    return function(config) {
+        if (config.uniqueID.length <= 0) {
+            $('#tab-label-download.tab').parent().hide();
+        }
+        $('.download-tab.load.btn').on('click', function() {
             $(this).hide();
-            loadImages(config.apiEndpoint, config.SKU, config.additionalGetParams);
+            loadImages(config.apiEndpoint, config.uniqueID, config.additionalGetParams);
         });
     }
 
-    function loadImages(apiEndpoint, SKU, additionalGetParams){
-        $.each(SKU, function(i, sku) {
+    function loadImages(apiEndpoint, uniqueID, additionalGetParams) {
+        $.each(uniqueID, function(i, uID) {
             $.ajax({
                 type: "GET",
                 accepts: {
                     "*": 'application/json',
                 },
                 async: false,
-                url: apiEndpoint + sku + additionalGetParams
-            }).then(function (data) {
+                url: apiEndpoint + uID + additionalGetParams
+            }).then(function(data) {
                 $.each(data, function() {
-                    let items = $('<a href="'+this.url+'" data-fancybox><img src="'+this.url+'" alt="'+this.alt+'"/></a>');
+                    let items = $('<a href="' + this[5] + '" data-fancybox><img src="' + this[5] + '" alt="' + this[3] + '"/></a>');
                     $('.download-tab.image-container').append(items);
                 });
             });

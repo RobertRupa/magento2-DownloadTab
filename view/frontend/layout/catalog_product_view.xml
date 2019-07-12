@@ -6,7 +6,7 @@
    </head>
     <body>
       <referenceBlock name="product.info.details">
-          <block class="RobertRupa\DownloadTab\Block\Product\View\Downloadtab"
+          <block class="RobertRupa\DownloadTab\Block\Product\View\DownloadTab"
             name="download.tab"
             template="RobertRupa_DownloadTab::product/view/download_tab.phtml"
             group="detailed_info"
